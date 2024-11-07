@@ -3,45 +3,46 @@ import 'dart:convert';
 import 'package:apituto/model/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-class PracticeGetAps extends StatefulWidget {
-  const PracticeGetAps({super.key});
+
+class PraciceGetApis extends StatefulWidget {
+  const PraciceGetApis({super.key});
 
   @override
-  State<PracticeGetAps> createState() => _PracticeGetApsState();
+  State<PraciceGetApis> createState() => _PraciceGetApisState();
 }
 
-class _PracticeGetApsState extends State<PracticeGetAps> {
-List <postmodel> PostListt=[];
-Future<List<postmodel>> GetPostApi ()async{
-  final responce=await http.get(Uri.parse("https://jsonplaceholder.typicode.com/posts"));
-  var data=jsonDecode(responce.body.toString());
-  if(responce.statusCode==200){
-for(var i in data)
-PostListt.add(postmodel.fromJson(i));
-return PostListt;
-  }else{
-return PostListt;
+class _PraciceGetApisState extends State<PraciceGetApis> {
+List<postmodel> ListPosts=[];
+
+Future<List<postmodel>> getPostApii()async{
+  final response=await http.get(Uri.parse("https://jsonplaceholder.typicode.com/posts"));
+  var data=jsonDecode(response.body.toString());
+  if(response.statusCode==200){
+    for(var i in data)
+    ListPosts.add(postmodel.fromJson(i));
+    return ListPosts;
+  }
+  else{
+    return ListPosts;
   }
 }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-body: Expanded(
-  child: FutureBuilder(future: GetPostApi(), builder: (context,snapshot){
-   if(!snapshot.hasData){
-  return Text("Loading");
-   }else{
-    return ListView.builder(
-      itemCount: PostListt.length,
-      itemBuilder: (context,index){
-  return Text(index.toString());
-    });
-   }
-  
-  }),
-),
-
+      body: FutureBuilder(
+        
+        future: getPostApii(),
+        
+         builder: (context,snapshot){
+          if(!snapshot.hasData){
+            return Text("Loading");
+          }
+          else{
+            return ListView.builder(itemBuilder: (context,index){
+              return Text(index.toString());
+            });
+          }
+         })
     );
   }
 }
