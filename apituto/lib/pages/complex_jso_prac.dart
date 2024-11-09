@@ -33,20 +33,63 @@ class _ComplexJsoPracState extends State<ComplexJsoPrac> {
         title: Text("Complex json apis"),
 
       ),
-      body: FutureBuilder(
-        future: GetUserApi(),
-         builder: (context,snapshot){
-          if(!snapshot.hasData){
-            return Text("Loading");
-          }
-          else{
-            return ListView.builder(
-              itemCount: UserList.length,
-              itemBuilder: (context,index){
-              return Text(UserList[index].id.toString());
-            });
-          }
-         }),
+      body: Column(
+        children: [
+          Expanded(
+            
+            child: FutureBuilder(
+              future: GetUserApi(),
+               builder: (context,snapshot){
+                if(!snapshot.hasData){
+                  return Text("Loading");
+                }
+                else{
+                  return ListView.builder(
+                    itemCount: UserList.length,
+                    itemBuilder: (context,index){
+return Card(
+  child: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(
+      children: [
+  ReusableRow(title: "Name", value: UserList[index].name.toString()),
+        ReusableRow(title: "Username", value: UserList[index].username.toString()),
+        ReusableRow(title: "Email", value: UserList[index].email.toString()),
+        ReusableRow(
+          title: "Address", 
+          value: "${UserList[index].address!.street}, "
+               
+        ),
+        
+        ReusableRow(title: "Geo", value: UserList[index].address!.geo!.lat.toString())],
+    ),
+  ),
+);
+                  });
+                }
+               }))
+        ],
+      )
+    );
+  }
+  
+}
+// ignore: must_be_immutable
+class ReusableRow extends StatelessWidget {
+  String title,value;
+
+   ReusableRow({super.key,required this.title,required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+     
+    children: [
+      Text(title),
+      Text(value)
+      
+    ],
     );
   }
 }
