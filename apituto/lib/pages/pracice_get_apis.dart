@@ -37,7 +37,7 @@ if(response.statusCode==200){
               future: getPhotosApi(),
                builder: (context,snapshot){
                 if(!snapshot.hasData){
-                  return Text("Loading");
+                  return Text("Loadinggg");
                 }
                 else{
                   return ListView.builder(
