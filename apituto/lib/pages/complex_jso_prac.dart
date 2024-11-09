@@ -61,7 +61,7 @@ return Card(
                
         ),
         
-        ReusableRow(title: "Geo", value: UserList[index].address!.geo!.lat.toString())],
+        ReusableRow(title: "geo", value: UserList[index].address!.geo!.lat.toString())],
     ),
   ),
 );
