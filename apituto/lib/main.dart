@@ -1,5 +1,7 @@
 import 'package:apituto/pages/complex_jso_prac.dart';
 import 'package:apituto/pages/pracice_get_apis.dart';
+import 'package:apituto/pages/products_apiss.dart';
+import 'package:apituto/pages/self_made.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
     
-      home: ComplexJsoPrac()
+      home: ProductsApiss()
     );
   }
 }
